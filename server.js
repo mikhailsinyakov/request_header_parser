@@ -5,8 +5,7 @@ const port = process.env.PORT;
 app.get("/", (req, res) => {
       const ip = req.headers['x-forwarded-for'].split(",")[0];
       const lang = req.headers["accept-language"].split(",")[0];
-      const software = req.headers["user-agent"].match(/\(\)/);
-      console.log(software);
+      const software = req.headers["user-agent"].match(/\([^\)]+\)/g)[0].slice(1, -1);
       const obj = {
         ipaddress: ip,
         language: lang,
