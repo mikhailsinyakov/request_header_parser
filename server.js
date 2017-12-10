@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.get("/", (req, res) => {
-      console.log(req.headers)
+      console.log(req.connection.remoteAddress)
       const obj = {
         ipaddress: req.ip,
         language: ""
