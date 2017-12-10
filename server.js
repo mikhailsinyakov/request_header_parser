@@ -3,11 +3,14 @@ const app = express();
 const port = process.env.PORT;
 
 app.get("/", (req, res) => {
-      console.log(req.headers["user-agent"])
+      const ip = req.headers['x-forwarded-for'].split(",")[0];
+      const lang = req.headers["accept-language"].split(",")[0];
+      const software = req.headers["user-agent"].match(/\(\)/);
+      console.log(software);
       const obj = {
-        ipaddress: req.headers['x-forwarded-for'].split(",")[0],
-        language: req.headers["accept-language"].split(",")[0],
-        software: 
+        ipaddress: ip,
+        language: lang,
+        software: software
       };
       res.set("Content-Type", "application/json")
       res.json(obj);
