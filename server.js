@@ -3,10 +3,11 @@ const app = express();
 const port = process.env.PORT;
 
 app.get("/", (req, res) => {
-      console.log(req.connection.remoteAddress)
+      console.log(req.headers["user-agent"])
       const obj = {
-        ipaddress: req.ip,
-        language: ""
+        ipaddress: req.headers['x-forwarded-for'].split(",")[0],
+        language: req.headers["accept-language"].split(",")[0],
+        software: 
       };
       res.set("Content-Type", "application/json")
       res.json(obj);
