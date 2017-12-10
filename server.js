@@ -1,18 +1,17 @@
-// server.js
-// where your node app starts
+const express = require('express');
+const app = express();
+const port = process.env.PORT;
 
-// init project
-var express = require('express');
-var app = express();
-
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-app.route("/whoami")
-    .post(function (request, response) {
-    
-      response.sendStatus(200);
+app.route("/")
+    .get((req, res) => {
+      console.log(req.ip)
+      const obj = {
+        ipaddress: req.ip,
+        language
+      };
+      res.json(obj);
     });
 
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+app.listen(port, () => {
+  console.log('Your app is listening on port ' + port);
 });
